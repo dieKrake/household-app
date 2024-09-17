@@ -11,9 +11,13 @@ import { Button } from "@/ui/button";
 import { useFormState, useFormStatus } from "react-dom";
 import { handleConfirmSignUp } from "@/lib/cognitoActions";
 import SendVerificationCode from "./send-verification-code-form";
+import { useState } from "react";
 
 export default function ConfirmSignUpForm() {
   const [errorMessage, dispatch] = useFormState(handleConfirmSignUp, undefined);
+
+  const [isCodeRequired, setIsCodeRequired] = useState(false);
+
   return (
     <form action={dispatch} className="space-y-3">
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
@@ -54,7 +58,7 @@ export default function ConfirmSignUpForm() {
                 type="text"
                 name="code"
                 placeholder="Enter code"
-                required
+                required={isCodeRequired}
                 minLength={6}
               />
               <KeyIcon className="pointer-events-none absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900" />
@@ -62,7 +66,7 @@ export default function ConfirmSignUpForm() {
           </div>
         </div>
         <ConfirmButton />
-        <div className="flex h-8 items-end space-x-1">
+        <div className="flex h-8 items-end space-x-1 mt-5">
           <div
             className="flex h-8 items-end space-x-1"
             aria-live="polite"

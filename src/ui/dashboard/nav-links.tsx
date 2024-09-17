@@ -1,9 +1,6 @@
 "use client";
-import {
-  UserGroupIcon,
-  HomeIcon,
-  DocumentDuplicateIcon,
-} from "@heroicons/react/24/outline";
+import { FaHome, FaTasks, FaRunning } from "react-icons/fa";
+import { FaKitchenSet } from "react-icons/fa6";
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -11,13 +8,14 @@ import { usePathname } from "next/navigation";
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
 const links = [
-  { name: "Home", href: "/dashboard", icon: HomeIcon },
+  { name: "Home", href: "/dashboard", icon: FaHome },
   {
-    name: "Invoices",
-    href: "/dashboard/invoices",
-    icon: DocumentDuplicateIcon,
+    name: "Tasks",
+    href: "/dashboard/tasks",
+    icon: FaTasks,
   },
-  { name: "Customers", href: "/dashboard/customers", icon: UserGroupIcon },
+  { name: "Kitchen", href: "/dashboard/kitchen", icon: FaKitchenSet },
+  { name: "Activities", href: "/dashboard/activities", icon: FaRunning },
 ];
 
 export default function NavLinks() {
