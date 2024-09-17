@@ -1,30 +1,34 @@
 import AcmeLogo from "@/ui/acme-logo";
 import { ArrowRightIcon } from "@heroicons/react/24/outline";
 import Link from "next/link";
-import { lusitana } from "@/ui/fonts";
 import Image from "next/image";
 
 export default function Page() {
   return (
-    <main className="flex min-h-screen flex-col p-6">
-      <div className="flex h-20 shrink-0 items-end rounded-lg bg-blue-500 p-4 md:h-52">
+    <main className="relative overflow-hidden">
+      {/* Logo Container */}
+      <div className="bg-oceanSemiDark dark:bg-gray-900 absolute top-0 left-0 right-0 z-10">
         <AcmeLogo />
       </div>
-      <div className="mt-4 flex grow flex-col gap-4 md:flex-row">
-        <div className="flex flex-col justify-center gap-6 rounded-lg bg-gray-50 px-6 py-10 md:w-2/5 md:px-20">
-          <p
-            className={`${lusitana.className} text-xl text-gray-800 md:text-3xl md:leading-normal`}
-          >
+
+      {/* Haupt Inhalt Container */}
+      <div className="bg-yellow-400 flex min-h-screen">
+        {/* Link und Text Container */}
+        <div className="bg-orange-600 flex-1 flex flex-col justify-center items-center">
+          <p className="text-2xl">
             <strong>Welcome to Acme.</strong>
           </p>
           <Link
             href="/auth/login"
-            className="flex items-center gap-5 self-start rounded-lg bg-blue-500 px-6 py-3 text-sm font-medium text-white transition-colors hover:bg-blue-400 md:text-base"
+            className="bg-red-600 flex items-center p-2 rounded-lg mt-6"
           >
-            <span>Log in</span> <ArrowRightIcon className="w-5 md:w-6" />
+            <span>Log in</span>
+            <ArrowRightIcon className="bg-red-900 h-5 w-5 ml-12" />
           </Link>
         </div>
-        <div className="flex items-center justify-center p-6 md:w-3/5 md:px-28 md:py-12">
+
+        {/* Bild Container */}
+        <div className="flex-1 flex justify-center items-center">
           <Image
             src="/hero-desktop.png"
             width={1000}
