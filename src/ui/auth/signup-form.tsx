@@ -18,7 +18,7 @@ export default function SignUpForm() {
   const [errorMessage, dispatch] = useFormState(handleSignUp, undefined);
   return (
     <form action={dispatch} className="space-y-3">
-      <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
+      <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8 dark:text-gray-900">
         <h1 className={`${lusitana.className} mb-3 text-2xl`}>
           Please create an account.
         </h1>
@@ -32,7 +32,7 @@ export default function SignUpForm() {
             </label>
             <div className="relative">
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="focus:outline-none focus:ring focus:ring-oceanSemiDark focus:border-oceanSemiDark peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
                 id="name"
                 type="text"
                 name="name"
@@ -52,7 +52,7 @@ export default function SignUpForm() {
             </label>
             <div className="relative">
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="focus:outline-none focus:ring focus:ring-oceanSemiDark focus:border-oceanSemiDark peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
                 id="email"
                 type="email"
                 name="email"
@@ -71,7 +71,7 @@ export default function SignUpForm() {
             </label>
             <div className="relative">
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="focus:outline-none focus:ring focus:ring-oceanSemiDark focus:border-oceanSemiDark peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500 mb-6"
                 id="password"
                 type="password"
                 name="password"
@@ -87,20 +87,20 @@ export default function SignUpForm() {
         <div className="flex justify-center">
           <Link
             href="/auth/login"
-            className="mt-2 cursor-pointer text-gray-900"
+            className="mt-6 cursor-pointer text-gray-900 underline transition-all duration-300 hover:translate-y-[-2px] hover:font-bold"
           >
             Already have an account? Log in.
           </Link>
         </div>
-        <div className="flex h-8 items-end space-x-1">
+        <div className="flex h-10 items-end justify-center">
           <div
-            className="flex h-8 items-end space-x-1"
+            className="flex items-center"
             aria-live="polite"
             aria-atomic="true"
           >
             {errorMessage && (
               <>
-                <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
+                <ExclamationCircleIcon className="mr-2 h-5 w-5 text-red-500" />
                 <p className="text-sm text-red-500">{errorMessage}</p>
               </>
             )}

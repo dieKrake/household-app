@@ -16,7 +16,7 @@ export default function LoginForm() {
   const [errorMessage, dispatch] = useFormState(handleSignIn, undefined);
   return (
     <form action={dispatch} className="space-y-3">
-      <div className="flex-1 rounded-lg bg-oceanLight px-6 pb-4 pt-8 dark:text-gray-900">
+      <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8 dark:text-gray-900">
         <h1 className={`${lusitana.className} mb-3 text-2xl`}>
           Please log in to continue.
         </h1>

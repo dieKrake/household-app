@@ -20,7 +20,7 @@ export default function Page() {
           </p>
           <Link
             href="/auth/login"
-            className="bg-oceanSemiDark dark:bg-oceanDark text-white flex items-center sm:py-4 sm:px-6 p-2 rounded-xl py-2 px-4 sm:rounded-3xl sm:mt-6 mt-2 sm:text-2xl text-sm -ml-3 sm:ml-0 dark:hover:bg-gray-900 hover:bg-gray-900 transition-colors duration-300"
+            className="bg-oceanSemiDark dark:bg-oceanDark text-white flex items-center sm:py-4 sm:px-6 p-2 rounded-xl py-2 px-4 sm:rounded-3xl sm:mt-6 mt-2 sm:text-2xl text-sm -ml-3 sm:ml-0 dark:hover:bg-gray-900 hover:bg-oceanDark transition-colors duration-300"
           >
             <div>Login</div>
             <ArrowRightIcon className="text-white h-5 w-5 ml-4 mr-2 sm:ml-5 sm:mr-2 " />
