@@ -1,25 +1,33 @@
 "use client";
-import { FaHome, FaTasks, FaRunning } from "react-icons/fa";
+import { FaHome, FaTasks, FaRunning, FaStar } from "react-icons/fa";
 import { FaKitchenSet } from "react-icons/fa6";
+import useAuthUser from "@/app/hooks/use-auth-user";
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-// Map of links to display in the side navigation.
-// Depending on the size of the application, this would be stored in a database.
-const links = [
-  { name: "Home", href: "/dashboard", icon: FaHome },
-  {
-    name: "Tasks",
-    href: "/dashboard/tasks",
-    icon: FaTasks,
-  },
-  { name: "Kitchen", href: "/dashboard/kitchen", icon: FaKitchenSet },
-  { name: "Activities", href: "/dashboard/activities", icon: FaRunning },
-];
-
 export default function NavLinks() {
+  const user = useAuthUser();
+  const links = [
+    { name: "Home", href: "/dashboard", icon: FaHome },
+    {
+      name: "Tasks",
+      href: "/dashboard/tasks",
+      icon: FaTasks,
+    },
+    { name: "Kitchen", href: "/dashboard/kitchen", icon: FaKitchenSet },
+    { name: "Activities", href: "/dashboard/activities", icon: FaRunning },
+  ];
+
   const pathname = usePathname();
+
+  if (user && user.isAdmin) {
+    links.push({
+      name: "Admin Area",
+      href: "/dashboard/admins",
+      icon: FaStar,
+    });
+  }
   return (
     <>
       {links.map((link) => {
