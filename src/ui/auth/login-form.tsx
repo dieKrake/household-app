@@ -49,7 +49,7 @@ export default function LoginForm() {
             </label>
             <div className="relative">
               <input
-                className="peer block w-full focus:outline-none focus:ring focus:ring-oceanSemiDark focus:border-oceanSemiDark rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="peer block w-full focus:outline-none focus:ring focus:ring-oceanSemiDark focus:border-oceanSemiDark rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500 mb-6"
                 id="password"
                 type="password"
                 name="password"
@@ -65,20 +65,20 @@ export default function LoginForm() {
         <div className="flex justify-center">
           <Link
             href="/auth/signup"
-            className="mt- cursor-pointer text-gray-900 underline"
+            className="mt-6 cursor-pointer text-gray-900 underline transition-all duration-300 hover:translate-y-[-2px] hover:font-bold"
           >
             {"Don't have an account? "} Sign up.
           </Link>
         </div>
-        <div className="flex h-8 items-end space-x-1">
+        <div className="flex h-10 items-end justify-center">
           <div
-            className="flex h-8 items-end space-x-1"
+            className="flex items-center"
             aria-live="polite"
             aria-atomic="true"
           >
             {errorMessage && (
               <>
-                <ExclamationCircleIcon className="h-5 w-5 text-red-500" />
+                <ExclamationCircleIcon className="mr-2 h-5 w-5 text-red-500" />
                 <p className="text-sm text-red-500">{errorMessage}</p>
               </>
             )}
