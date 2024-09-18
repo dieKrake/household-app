@@ -16,7 +16,7 @@ export default function LoginForm() {
   const [errorMessage, dispatch] = useFormState(handleSignIn, undefined);
   return (
     <form action={dispatch} className="space-y-3">
-      <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8">
+      <div className="flex-1 rounded-lg bg-oceanLight px-6 pb-4 pt-8 dark:text-gray-900">
         <h1 className={`${lusitana.className} mb-3 text-2xl`}>
           Please log in to continue.
         </h1>
@@ -30,7 +30,7 @@ export default function LoginForm() {
             </label>
             <div className="relative">
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="peer block w-full focus:outline-none focus:ring focus:ring-oceanSemiDark focus:border-oceanSemiDark rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
                 id="email"
                 type="email"
                 name="email"
@@ -49,7 +49,7 @@ export default function LoginForm() {
             </label>
             <div className="relative">
               <input
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="peer block w-full focus:outline-none focus:ring focus:ring-oceanSemiDark focus:border-oceanSemiDark rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
                 id="password"
                 type="password"
                 name="password"
@@ -65,7 +65,7 @@ export default function LoginForm() {
         <div className="flex justify-center">
           <Link
             href="/auth/signup"
-            className="mt-2 cursor-pointer text-blue-500"
+            className="mt- cursor-pointer text-gray-900 underline"
           >
             {"Don't have an account? "} Sign up.
           </Link>
