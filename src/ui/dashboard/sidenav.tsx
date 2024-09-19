@@ -16,7 +16,7 @@ export default function SideNav() {
       </Link>
       <div className="flex grow flex-row justify-between space-x-2 md:flex-col md:space-x-0 md:space-y-2">
         <NavLinks />
-        <div className="hidden dark:opacity-10 opacity-40  h-auto w-full grow rounded-md bg-gray-50 dark:bg-gray-200 md:block"></div>
+        <div className="hidden dark:opacity-100 opacity-40  h-auto w-full grow rounded-md bg-gray-50 dark:bg-gray-900 md:block"></div>
         <LogoutForm />
       </div>
     </div>

@@ -27,6 +27,7 @@ const config: Config = {
         // semiDark: "#A57497",
         // semiLight: "#BF60A3",
         // light: "#E6CFDF",
+        // Doesnt work on Dark activities
 
         // Brown colors
         // dark: "#807259",

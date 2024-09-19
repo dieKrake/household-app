@@ -2,40 +2,43 @@ import { activityList } from "@/lib/dummy-data/activity-list";
 
 export default function Activities() {
   return (
-    <div className="bg-green-600 flex flex-wrap h-full w-full justify-around items-start">
+    <div className="flex flex-wrap h-full w-full justify-around items-start text-lg">
       {activityList.map((activity) => (
         <div
           key={activity.id}
           className="w-64 h-60 sm:w-56 sm:h-56 md:w-48 md:h-48 mx-2 mb-5"
         >
-          <div className="flex flex-col h-full justify-between bg-orange-600 p-2 gap-2">
-            <div className="text-center bg-white">
-              <p className="text-lg text-gray-700 bg-yellow-300">
+          <div className="flex flex-col h-full justify-between p-2 gap-2 rounded-xl bg-gray-50 dark:bg-gray-900">
+            <div className="text-center">
+              <p className="mt-2 text-xl text-gray-950 dark:text-light">
                 {activity.activityName}
               </p>
             </div>
 
-            <div className="flex flex-wrap justify-center gap-2 bg-white p-2">
+            <div className="flex flex-wrap justify-center gap-2 p-2">
               {Array.from({ length: activity.totalReps }, (_, index) => (
                 <div
                   key={index}
-                  className={`w-6 h-6 rounded-full ${
-                    index < activity.progress ? "bg-green-500" : "bg-gray-300"
+                  className={`w-6 h-6 rounded-full border dark:border-dark border-semiDark ${
+                    index < activity.progress
+                      ? "bg-semiLight dark:bg-semiLight"
+                      : "bg-gray-100 dark:bg-dark"
                   }`}
                 />
               ))}
             </div>
-            <div className="flex gap-2">
-              <div className="w-full h-12 bg-red-600 flex items-center justify-center">
+            <div className="flex gap-2 text-gray-950">
+              <div className="w-full h-12 dark:bg-dark bg-light flex items-center justify-center rounded-xl dark:text-light">
                 done
               </div>
-              <div className="w-full h-12 bg-red-200 flex items-center justify-center">
+              <div className="w-full h-12 bg-light dark:bg-dark flex items-center justify-center rounded-xl dark:text-light">
                 undo
               </div>
             </div>
           </div>
         </div>
       ))}
+      <div className="h-10 w-full"></div>
     </div>
   );
 }
