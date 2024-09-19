@@ -30,7 +30,7 @@ export default function LoginForm() {
             </label>
             <div className="relative">
               <input
-                className="peer block w-full focus:outline-none focus:ring focus:ring-oceanSemiDark focus:border-oceanSemiDark rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="peer block w-full focus:outline-none focus:ring focus:ring-semiDark focus:border-semiDark rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
                 id="email"
                 type="email"
                 name="email"
@@ -49,7 +49,7 @@ export default function LoginForm() {
             </label>
             <div className="relative">
               <input
-                className="peer block w-full focus:outline-none focus:ring focus:ring-oceanSemiDark focus:border-oceanSemiDark rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500 mb-6"
+                className="peer block w-full focus:outline-none focus:ring focus:ring-semiDark focus:border-semiDark rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500 mb-6"
                 id="password"
                 type="password"
                 name="password"
