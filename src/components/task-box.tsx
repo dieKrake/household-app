@@ -1,3 +1,5 @@
+import TaskButton from "./task-button";
+
 type Task = {
   id: number;
   activityName: string;
@@ -35,12 +37,8 @@ export default function TaskBox({ taskList }: TaskBoxProps) {
           ))}
         </div>
         <div className="flex gap-2 text-gray-950">
-          <div className="w-full h-12 dark:bg-dark bg-light flex items-center justify-center rounded-xl dark:text-light">
-            done
-          </div>
-          <div className="w-full h-12 bg-light dark:bg-dark flex items-center justify-center rounded-xl dark:text-light">
-            undo
-          </div>
+          <TaskButton text="Done" />
+          <TaskButton text="Undo" />
         </div>
       </div>
     </div>
