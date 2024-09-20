@@ -5,6 +5,7 @@ import useAuthUser from "@/app/hooks/use-auth-user";
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion } from "framer-motion";
 
 export default function NavLinks() {
   const user = useAuthUser();
@@ -33,20 +34,22 @@ export default function NavLinks() {
       {links.map((link) => {
         const LinkIcon = link.icon;
         return (
-          <Link
-            key={link.name}
-            href={link.href}
-            className={clsx(
-              "flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 dark:bg-gray-900 p-3 text-sm text-gray-500 font-medium hover:bg-light  dark:hover:bg-semiLight hover:text-gray-950 dark:hover:text-gray-950 md:flex-none md:justify-start md:p-2 md:px-3 transition-colors duration-300 shadow-md",
-              {
-                "bg-light dark:bg-semiLight text-gray-950":
-                  pathname === link.href,
-              }
-            )}
-          >
-            <LinkIcon className="w-6" />
-            <p className="hidden md:block">{link.name}</p>
-          </Link>
+          <motion.div whileTap={{ scale: 0.9 }} whileHover={{ scale: 1.02 }}>
+            <Link
+              key={link.name}
+              href={link.href}
+              className={clsx(
+                "flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 dark:bg-gray-900 p-3 text-sm text-gray-500 font-medium hover:bg-semiDark  dark:hover:bg-semiLight hover:text-white dark:hover:text-gray-950 md:flex-none md:justify-start md:p-2 md:px-3 transition-colors duration-300 shadow-md",
+                {
+                  "bg-semiDark dark:bg-semiLight text-white dark:text-gray-950":
+                    pathname === link.href,
+                }
+              )}
+            >
+              <LinkIcon className="w-6" />
+              <p className="hidden md:block">{link.name}</p>
+            </Link>
+          </motion.div>
         );
       })}
     </>

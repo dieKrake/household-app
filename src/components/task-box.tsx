@@ -1,4 +1,7 @@
+"use client";
+
 import TaskButton from "./task-button";
+import { AnimatePresence, motion } from "framer-motion";
 
 type Task = {
   id: number;
@@ -13,8 +16,15 @@ type TaskBoxProps = {
 
 export default function TaskBox({ taskList }: TaskBoxProps) {
   return taskList.map((task) => (
-    <div
+    <motion.div
       key={task.id}
+      initial={{ opacity: 0, scale: 0 }}
+      animate={{ opacity: 1, scale: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{
+        type: "tween",
+        duration: 0.3,
+      }}
       className="w-64 h-60 sm:w-56 sm:h-56 md:w-48 md:h-48 mx-2 mb-5 shadow-lg"
     >
       <div className="flex flex-col h-full justify-between p-2 gap-2 rounded-xl bg-gray-50 dark:bg-gray-900">
@@ -41,6 +51,6 @@ export default function TaskBox({ taskList }: TaskBoxProps) {
           <TaskButton text="Undo" />
         </div>
       </div>
-    </div>
+    </motion.div>
   ));
 }

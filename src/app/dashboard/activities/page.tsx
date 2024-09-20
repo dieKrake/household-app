@@ -1,5 +1,8 @@
+"use client";
+
 import TaskBox from "@/components/task-box";
 import { activityList } from "@/lib/dummy-data/activity-list";
+import { AnimatePresence, motion } from "framer-motion";
 
 export default function Activities() {
   return (
