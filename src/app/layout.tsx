@@ -18,7 +18,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="!scroll-smooth">
       <body
-        className={`${inter.className} text-gray-950 relative dark:bg-semiDark dark:text-gray-50 dark:text-opacity-90 bg-gray-200`}
+        className={`${inter.className} text-gray-950 relative dark:bg-dark dark:text-gray-50 dark:text-opacity-90 bg-gray-200`}
       >
         <>
           <ConfigureAmplifyClientSide />

@@ -13,7 +13,7 @@ export default function TaskBox({ taskList }: TaskBoxProps) {
   return taskList.map((task) => (
     <div
       key={task.id}
-      className="w-64 h-60 sm:w-56 sm:h-56 md:w-48 md:h-48 mx-2 mb-5"
+      className="w-64 h-60 sm:w-56 sm:h-56 md:w-48 md:h-48 mx-2 mb-5 shadow-lg"
     >
       <div className="flex flex-col h-full justify-between p-2 gap-2 rounded-xl bg-gray-50 dark:bg-gray-900">
         <div className="text-center">
@@ -26,10 +26,10 @@ export default function TaskBox({ taskList }: TaskBoxProps) {
           {Array.from({ length: task.totalReps }, (_, index) => (
             <div
               key={index}
-              className={`w-6 h-6 rounded-full border dark:border-dark border-semiDark ${
+              className={`w-6 h-6 rounded-full shadow-md ${
                 index < task.progress
                   ? "bg-semiLight dark:bg-semiLight"
-                  : "bg-gray-100 dark:bg-dark"
+                  : "bg-gray-300 opacity-70 dark:bg-dark"
               }`}
             />
           ))}
