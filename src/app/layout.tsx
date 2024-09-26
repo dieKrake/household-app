@@ -4,6 +4,7 @@ import { inter } from "@/ui/fonts";
 import ConfigureAmplifyClientSide from "./amplify-cognito-config";
 import ThemeContextProvider from "@/context/theme-context";
 import ThemeSwitch from "@/components/theme-switch";
+import { ActivityProvider } from "@/context/activity-context";
 
 export const metadata: Metadata = {
   title: "Next.js Cognito Authentication",
@@ -23,7 +24,7 @@ export default function RootLayout({
         <>
           <ConfigureAmplifyClientSide />
           <ThemeContextProvider>
-            {children}
+            <ActivityProvider>{children}</ActivityProvider>
             <ThemeSwitch />
           </ThemeContextProvider>
         </>

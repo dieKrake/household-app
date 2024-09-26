@@ -10,20 +10,27 @@ import { motion } from "framer-motion";
 export default function NavLinks() {
   const user = useAuthUser();
   const links = [
-    { name: "Home", href: "/dashboard", icon: FaHome },
+    { id: 1, name: "Home", href: "/dashboard", icon: FaHome },
     {
+      id: 2,
       name: "Tasks",
       href: "/dashboard/tasks",
       icon: FaTasks,
     },
-    { name: "Kitchen", href: "/dashboard/kitchen", icon: FaKitchenSet },
-    { name: "Activities", href: "/dashboard/activities", icon: FaRunning },
+    { id: 3, name: "Kitchen", href: "/dashboard/kitchen", icon: FaKitchenSet },
+    {
+      id: 4,
+      name: "Activities",
+      href: "/dashboard/activities",
+      icon: FaRunning,
+    },
   ];
 
   const pathname = usePathname();
 
   if (user && user.isAdmin) {
     links.push({
+      id: 5,
       name: "Admin Area",
       href: "/dashboard/admins",
       icon: FaStar,
@@ -34,7 +41,11 @@ export default function NavLinks() {
       {links.map((link) => {
         const LinkIcon = link.icon;
         return (
-          <motion.div whileTap={{ scale: 0.9 }} whileHover={{ scale: 1.02 }}>
+          <motion.div
+            key={link.id}
+            whileTap={{ scale: 0.9 }}
+            whileHover={{ scale: 1.02 }}
+          >
             <Link
               key={link.name}
               href={link.href}
