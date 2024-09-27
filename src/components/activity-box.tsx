@@ -1,23 +1,23 @@
 "use client";
 
-import TaskButton from "./task-button";
+import TaskButton from "./activity-button";
 import { motion } from "framer-motion";
 
-type Task = {
+type Activity = {
   id: number;
   activityName: string;
   totalReps: number;
   progress: number;
 };
 
-type TaskBoxProps = {
-  taskList: Task[];
+type ActivityBoxProps = {
+  activityList: Activity[];
 };
 
-export default function TaskBox({ taskList }: TaskBoxProps) {
-  return taskList.map((task) => (
+export default function ActivityBox({ activityList }: ActivityBoxProps) {
+  return activityList.map((activity) => (
     <motion.div
-      key={task.id}
+      key={activity.id}
       initial={{ opacity: 0, scale: 0 }}
       animate={{ opacity: 1, scale: 1 }}
       exit={{ opacity: 0 }}
@@ -30,16 +30,16 @@ export default function TaskBox({ taskList }: TaskBoxProps) {
       <div className="flex flex-col h-full justify-between p-2 gap-2 rounded-xl bg-gray-50 dark:bg-gray-900">
         <div className="text-center">
           <p className="mt-2 text-xl text-gray-950 dark:text-light">
-            {task.activityName}
+            {activity.activityName}
           </p>
         </div>
 
         <div className="flex flex-wrap justify-center gap-2 p-2">
-          {Array.from({ length: task.totalReps }, (_, index) => (
+          {Array.from({ length: activity.totalReps }, (_, index) => (
             <div
               key={index}
               className={`w-6 h-6 rounded-full shadow-md ${
-                index < task.progress
+                index < activity.progress
                   ? "bg-semiLight dark:bg-semiLight"
                   : "bg-gray-300 opacity-70 dark:bg-dark"
               }`}
