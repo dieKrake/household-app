@@ -1,11 +1,21 @@
-type TaskButtonProps = {
-  text: String;
+import { motion } from "framer-motion";
+
+type ActivityButtonProps = {
+  text: string;
 };
 
-export default function TaskButton({ text }: TaskButtonProps) {
+export default function ActivityButton({ text }: ActivityButtonProps) {
   return (
-    <div className="w-full h-12 dark:bg-dark bg-light flex items-center justify-center rounded-xl dark:text-light shadow-md cursor-pointer">
+    <motion.div
+      className="h-12 dark:bg-dark bg-light flex items-center justify-center rounded-xl dark:text-light shadow-md cursor-pointer
+                   "
+      whileHover={{
+        scale: 1.1,
+        transition: { duration: 0.1 },
+      }}
+      whileTap={{ scale: 0.9 }}
+    >
       {text}
-    </div>
+    </motion.div>
   );
 }

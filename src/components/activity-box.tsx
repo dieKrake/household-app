@@ -1,21 +1,53 @@
 "use client";
 
-import TaskButton from "./activity-button";
+import ActivityButton from "./activity-button";
 import { motion } from "framer-motion";
+import { useActivityContext } from "@/context/activity-context";
 
-type Activity = {
-  id: number;
-  activityName: string;
-  totalReps: number;
-  progress: number;
-};
+export default function ActivityBox() {
+  const { activities, setActivities } = useActivityContext();
+  const userId = "user-sub-456";
+  const userActivityList =
+    activities.find((user: any) => user.userId === userId)?.activities || [];
 
-type ActivityBoxProps = {
-  activityList: Activity[];
-};
+  const increaseProgress = (activityId: number) => {
+    setActivities((prevActivities: any) =>
+      prevActivities.map((user: any) => {
+        if (user.userId === userId) {
+          return {
+            ...user,
+            activities: user.activities.map((activity: any) =>
+              activity.id === activityId &&
+              activity.progress < activity.totalReps
+                ? { ...activity, progress: activity.progress + 1 }
+                : activity
+            ),
+          };
+        }
+        return user;
+      })
+    );
+  };
 
-export default function ActivityBox({ activityList }: ActivityBoxProps) {
-  return activityList.map((activity) => (
+  const decreaseProgress = (activityId: number) => {
+    setActivities((prevActivities: any) =>
+      prevActivities.map((user: any) => {
+        if (user.userId === userId) {
+          return {
+            ...user,
+            activities: user.activities.map((activity: any) =>
+              activity.id === activityId && activity.progress > 0
+                ? { ...activity, progress: activity.progress - 1 }
+                : activity
+            ),
+          };
+        }
+        return user;
+      })
+    );
+  };
+
+  return userActivityList.map((activity: any) => (
     <motion.div
       key={activity.id}
       initial={{ opacity: 0, scale: 0 }}
@@ -35,11 +67,11 @@ export default function ActivityBox({ activityList }: ActivityBoxProps) {
         </div>
 
         <div className="flex flex-wrap justify-center gap-2 p-2">
-          {Array.from({ length: activity.totalReps }, (_, index) => (
+          {Array.from({ length: activity.totalReps }, (_, idx) => (
             <div
-              key={index}
+              key={idx}
               className={`w-6 h-6 rounded-full shadow-md ${
-                index < activity.progress
+                idx < activity.progress
                   ? "bg-semiLight dark:bg-semiLight"
                   : "bg-gray-300 opacity-70 dark:bg-dark"
               }`}
@@ -47,8 +79,18 @@ export default function ActivityBox({ activityList }: ActivityBoxProps) {
           ))}
         </div>
         <div className="flex gap-2 text-gray-950">
-          <TaskButton text="Done" />
-          <TaskButton text="Undo" />
+          <div
+            className="w-full select-none"
+            onClick={() => increaseProgress(activity.id)}
+          >
+            <ActivityButton text="Done" />
+          </div>
+          <div
+            className="w-full select-none"
+            onClick={() => decreaseProgress(activity.id)}
+          >
+            <ActivityButton text="Undo" />
+          </div>
         </div>
       </div>
     </motion.div>
