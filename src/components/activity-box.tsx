@@ -6,7 +6,7 @@ import { useActivityContext } from "@/context/activity-context";
 
 export default function ActivityBox() {
   const { activities, setActivities } = useActivityContext();
-  const userId = "user-sub-456";
+  const userId = "user-sub-123";
   const userActivityList =
     activities.find((user: any) => user.userId === userId)?.activities || [];
 
@@ -61,20 +61,23 @@ export default function ActivityBox() {
     >
       <div className="flex flex-col h-full justify-between p-2 gap-2 rounded-xl bg-gray-50 dark:bg-gray-900">
         <div className="text-center">
-          <p className="mt-2 text-xl text-gray-950 dark:text-light">
+          <p className="mt-2 text-xl text-gray-950 dark:text-light select-none">
             {activity.activityName}
           </p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-2 p-2">
+        <div className="flex flex-wrap justify-center gap-[0.6rem] p-2">
           {Array.from({ length: activity.totalReps }, (_, idx) => (
-            <div
+            <motion.div
               key={idx}
               className={`w-6 h-6 rounded-full shadow-md ${
                 idx < activity.progress
                   ? "bg-semiLight dark:bg-semiLight"
                   : "bg-gray-300 opacity-70 dark:bg-dark"
               }`}
+              initial={{ scale: 1 }}
+              animate={idx < activity.progress ? { scale: 1.1 } : { scale: 1 }}
+              transition={{ type: "spring", stiffness: 800 }}
             />
           ))}
         </div>
