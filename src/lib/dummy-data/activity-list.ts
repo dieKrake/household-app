@@ -29,7 +29,7 @@ export const activityList: ActivityList[] = [
       {
         id: 3,
         activityName: "Schwimmen",
-        progress: 4,
+        progress: 1,
         totalReps: 2,
       },
       {
@@ -41,7 +41,7 @@ export const activityList: ActivityList[] = [
       {
         id: 5,
         activityName: "Krafttraining",
-        progress: 5,
+        progress: 2,
         totalReps: 4,
       },
     ],

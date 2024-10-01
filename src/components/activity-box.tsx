@@ -17,12 +17,19 @@ export default function ActivityBox() {
         if (user.userId === userId) {
           return {
             ...user,
-            activities: user.activities.map((activity: any) =>
-              activity.id === activityId &&
-              activity.progress < activity.totalReps
-                ? { ...activity, progress: activity.progress + 1 }
-                : activity
-            ),
+            activities: user.activities.map((activity: any) => {
+              if (
+                activity.id === activityId &&
+                activity.progress < activity.totalReps
+              ) {
+                const updatedProgress = activity.progress + 1;
+
+                const isCompleted = updatedProgress === activity.totalReps;
+
+                return { ...activity, progress: updatedProgress, isCompleted };
+              }
+              return activity;
+            }),
           };
         }
         return user;
@@ -38,7 +45,11 @@ export default function ActivityBox() {
             ...user,
             activities: user.activities.map((activity: any) =>
               activity.id === activityId && activity.progress > 0
-                ? { ...activity, progress: activity.progress - 1 }
+                ? {
+                    ...activity,
+                    progress: activity.progress - 1,
+                    isCompleted: false,
+                  }
                 : activity
             ),
           };
@@ -52,11 +63,22 @@ export default function ActivityBox() {
     <motion.div
       key={activity.id}
       initial={{ opacity: 0, scale: 0 }}
-      animate={{ opacity: 1, scale: 1 }}
+      animate={{
+        opacity: 1,
+        scale: activity.isCompleted ? 1.05 : 1,
+        rotate: activity.isCompleted ? [0, 5, 0, -5, 0] : 0,
+        borderRadius: "100%",
+      }}
       exit={{ opacity: 0 }}
       transition={{
         type: "tween",
         duration: 0.3,
+        ease: "easeInOut",
+        scale: {
+          type: "spring",
+          stiffness: 100,
+          damping: 20,
+        },
       }}
       className="w-64 h-60 sm:w-56 sm:h-56 md:w-50 md:h-60 mx-2 mb-5 shadow-lg"
     >
