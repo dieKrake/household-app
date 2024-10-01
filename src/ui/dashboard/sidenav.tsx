@@ -9,7 +9,7 @@ import { motion } from "framer-motion";
 export default function SideNav() {
   return (
     <motion.div
-      initial={{ x: -300 }}
+      initial={{ x: -500 }}
       animate={{ x: 0 }}
       transition={{
         delay: 0.1,
@@ -17,7 +17,7 @@ export default function SideNav() {
         stiffness: 150,
         damping: 19,
       }}
-      className="flex h-full flex-col px-3 py-4 md:px-2"
+      className="flex h-full flex-col px-3 py-4 md:px-2 md:bg-transparent dark:bg-dark bg-gray-200"
     >
       <Link
         className="mb-2 flex h-20 items-end justify-start rounded-md bg-semiDark dark:bg-gray-900 p-4 md:h-40 shadow-xl"
