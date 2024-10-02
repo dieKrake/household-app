@@ -4,10 +4,11 @@ import ActivityButton from "./activity-button";
 import { motion } from "framer-motion";
 import { useActivityContext } from "@/context/activity-context";
 import SaveButton from "./SaveButton";
+import { FaEdit } from "react-icons/fa";
 
-export default function ActivityBox() {
+export default function ActivityBoxes() {
   const { activities, setActivities } = useActivityContext();
-  const userId = "user-sub-123";
+  const userId = "user-sub-456";
   const userActivityList =
     activities.find((user: any) => user.userId === userId)?.activities || [];
 
@@ -83,10 +84,16 @@ export default function ActivityBox() {
       className="w-64 h-60 sm:w-56 sm:h-56 md:w-50 md:h-60 mx-2 mb-5 shadow-lg"
     >
       <div className="flex flex-col h-full justify-between p-2 gap-2 rounded-xl bg-gray-50 dark:bg-gray-900">
-        <div className="text-center">
-          <p className="mt-2 text-xl text-gray-950 dark:text-light select-none">
-            {activity.activityName}
-          </p>
+        <div className="relative text-center flex justify-center mt-2 text-xl text-gray-950 dark:text-light select-none">
+          <p className="text-center">{activity.activityName}</p>
+          <motion.div
+            animate={{ opacity: 0.8, scale: 1.0 }}
+            whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.9 }}
+            className="absolute right-0 pr-1 pt-1 cursor-pointer"
+          >
+            <FaEdit />
+          </motion.div>
         </div>
 
         <div className="flex flex-wrap justify-center gap-[0.6rem] p-2">
