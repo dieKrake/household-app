@@ -1,4 +1,4 @@
-interface ActivityItem {
+export interface ActivityItem {
   id: number;
   activityName: string;
   progress: number;

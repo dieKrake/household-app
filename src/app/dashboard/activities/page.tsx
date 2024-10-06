@@ -2,7 +2,7 @@
 
 import ActivityBoxes from "@/components/activity-boxes";
 import AddButton from "@/components/add-button";
-import { delay, motion } from "framer-motion";
+import { motion } from "framer-motion";
 // import { useActivityContext } from "@/context/activity-context";
 
 export default function Activities() {

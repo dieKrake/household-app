@@ -4,9 +4,9 @@ import { createContext, useContext, useState, useEffect } from "react";
 import useAuthUser from "@/app/hooks/use-auth-user";
 import { activityList, ActivityList } from "@/lib/dummy-data/activity-list";
 
-const ActivityContext = createContext<any>(null);
+const ActivitiesContext = createContext<any>(null);
 
-export const ActivityProvider = ({ children }: any) => {
+export const ActivitiesProvider = ({ children }: any) => {
   const user = useAuthUser();
   const [activities, setActivities] = useState<ActivityList[]>([]);
 
@@ -26,12 +26,12 @@ export const ActivityProvider = ({ children }: any) => {
   };
 
   return (
-    <ActivityContext.Provider value={{ activities, setActivities }}>
+    <ActivitiesContext.Provider value={{ activities, setActivities }}>
       {children}
-    </ActivityContext.Provider>
+    </ActivitiesContext.Provider>
   );
 };
 
-export const useActivityContext = () => {
-  return useContext(ActivityContext);
+export const useActivitiesContext = () => {
+  return useContext(ActivitiesContext);
 };
