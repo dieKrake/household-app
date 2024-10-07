@@ -7,6 +7,7 @@ import ThemeSwitch from "@/components/theme-switch";
 import { ActivitiesProvider } from "@/context/activities-context";
 import { EditingProvider } from "@/context/edit-context";
 import { ActivityProvider } from "@/context/selected-activity-context";
+import { AddingProvider } from "@/context/adding-activity-context";
 
 export const metadata: Metadata = {
   title: "Next.js Cognito Authentication",
@@ -28,7 +29,9 @@ export default function RootLayout({
           <ThemeContextProvider>
             <ActivitiesProvider>
               <ActivityProvider>
-                <EditingProvider>{children}</EditingProvider>
+                <AddingProvider>
+                  <EditingProvider>{children}</EditingProvider>
+                </AddingProvider>
               </ActivityProvider>
             </ActivitiesProvider>
             <ThemeSwitch />

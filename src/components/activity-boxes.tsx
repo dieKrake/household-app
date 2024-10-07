@@ -9,7 +9,7 @@ import { useEditingContext } from "@/context/edit-context";
 import { useActivityContext } from "@/context/selected-activity-context";
 
 export default function ActivityBoxes() {
-  const { isEditing, setIsEditing } = useEditingContext();
+  const { setIsEditing } = useEditingContext();
   const { activities, setActivities } = useActivitiesContext();
   const { setActivity } = useActivityContext();
   const userId = "user-sub-123";
@@ -100,8 +100,8 @@ export default function ActivityBoxes() {
               >
                 <FaEdit
                   onClick={() => {
-                    setIsEditing(true); // Setze den Editing State
-                    setActivity(activity); // Setze die ausgewählte Aktivität im Kontext
+                    setIsEditing(true);
+                    setActivity(activity);
                   }}
                 />
               </motion.div>
@@ -110,7 +110,7 @@ export default function ActivityBoxes() {
             <div className="flex flex-wrap justify-center gap-[0.6rem] p-2">
               {Array.from({ length: activity.totalReps }, (_, idx) => (
                 <motion.div
-                  key={`${activity.id}-${idx}`} // key für die Fortschritt-Boxen
+                  key={`${activity.id}-${idx}`}
                   className={`w-6 h-6 rounded-full shadow-md ${
                     idx < activity.progress
                       ? "bg-semiLight dark:bg-semiLight"
