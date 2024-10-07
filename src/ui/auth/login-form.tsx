@@ -10,14 +10,13 @@ import { useFormState } from "react-dom";
 import { handleSignIn } from "@/lib/cognitoActions";
 import Link from "next/link";
 import { LoginButton } from "./login-button";
-import { secret } from "@aws-amplify/backend";
 
 export default function LoginForm() {
   const [errorMessage, dispatch] = useFormState(handleSignIn, undefined);
   console.log(
     "NEXT TEST VARIABLES:",
-    String(secret("NEXT_PUBLIC_USER_POOL_CLIENT_ID")),
-    String(secret("NEXT_PUBLIC_USER_POOL_ID"))
+    process.env.NEXT_PUBLIC_USER_POOL_ID,
+    process.env.NEXT_PUBLIC_USER_POOL_CLIENT_ID
   );
   return (
     <form action={dispatch} className="space-y-3">
