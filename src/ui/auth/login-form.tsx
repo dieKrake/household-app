@@ -13,6 +13,11 @@ import { LoginButton } from "./login-button";
 
 export default function LoginForm() {
   const [errorMessage, dispatch] = useFormState(handleSignIn, undefined);
+  console.log(
+    "NEXT TEST VARIABLES",
+    process.env.NEXT_PUBLIC_USER_POOL_ID,
+    process.env.NEXT_PUBLIC_USER_POOL_CLIENT_ID
+  );
   return (
     <form action={dispatch} className="space-y-3">
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8 dark:text-gray-900">
