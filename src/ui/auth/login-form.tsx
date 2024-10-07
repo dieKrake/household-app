@@ -14,7 +14,7 @@ import { LoginButton } from "./login-button";
 export default function LoginForm() {
   const [errorMessage, dispatch] = useFormState(handleSignIn, undefined);
   console.log(
-    "NEXT TEST VARIABLES",
+    "NEXT TEST VARIABLES:",
     process.env.NEXT_PUBLIC_USER_POOL_ID,
     process.env.NEXT_PUBLIC_USER_POOL_CLIENT_ID
   );
