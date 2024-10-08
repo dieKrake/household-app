@@ -4,6 +4,7 @@ import { useAddingContext } from "@/context/adding-activity-context";
 import { useEditingContext } from "@/context/edit-context";
 import { ActivityItem } from "@/lib/dummy-data/activity-list";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 interface InputFormProps {
   activity: ActivityItem | undefined;
@@ -42,7 +43,9 @@ export default function InputForm({ activity }: InputFormProps) {
         setIsEditing(false), setIsAdding(false);
       }}
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0, scale: 0 }}
+        animate={{ opacity: 100, scale: 1 }}
         className="flex flex-col bg-gray-50 dark:bg-gray-900 rounded-xl shadow-lg text-gray-950 dark:text-light relative p-10 items-center" //
         onClick={(e) => e.stopPropagation()}
       >
@@ -82,12 +85,12 @@ export default function InputForm({ activity }: InputFormProps) {
         />
 
         <button
-          className="bg-semiDark dark:bg-semiLight px-5 py-3 shadow-xl rounded-xl dark:text-gray-950 text-white cursor-pointer select-none z-50 text-center mt-2"
+          className="bg-semiDark dark:bg-semiLight px-5 py-3 shadow-xl rounded-xl dark:text-gray-950 text-white cursor-pointer select-none z-50 text-center mt-2 hover:scale-105 transition-transform"
           onClick={() => console.log("Form submitted", formState)} // Hier kannst du die Submit-Logik hinzufügen
         >
           Save
         </button>
-      </div>
+      </motion.div>
     </div>
   );
 }
