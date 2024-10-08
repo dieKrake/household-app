@@ -38,7 +38,7 @@ export default function InputForm({ activity }: InputFormProps) {
 
   return (
     <div
-      className="absolute h-full w-full flex justify-center items-center bg-gray-500 dark:bg-gray-600 bg-opacity-60 dark:bg-opacity-60 z-50"
+      className="fixed h-full w-full flex justify-center items-center bg-gray-500 dark:bg-gray-600 bg-opacity-60 dark:bg-opacity-60 z-50"
       onClick={() => {
         setIsEditing(false), setIsAdding(false);
       }}
