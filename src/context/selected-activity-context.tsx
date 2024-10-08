@@ -1,7 +1,12 @@
 "use client";
 
 import { createContext, useContext, useState, ReactNode } from "react";
-import { ActivityItem } from "@/lib/dummy-data/activity-list";
+
+interface ActivityItem {
+  activity: string;
+  reps: number;
+  total_reps: number;
+}
 
 interface ActivityContextProps {
   activity: ActivityItem | undefined;

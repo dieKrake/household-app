@@ -7,7 +7,6 @@ import SaveButton from "./SaveButton";
 import { FaEdit } from "react-icons/fa";
 import { useEditingContext } from "@/context/edit-context";
 import { useActivityContext } from "@/context/selected-activity-context";
-import { useEffect } from "react";
 
 export default function ActivityBoxes() {
   const { setIsEditing } = useEditingContext();
