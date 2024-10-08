@@ -2,9 +2,14 @@
 
 import { useAddingContext } from "@/context/adding-activity-context";
 import { useEditingContext } from "@/context/edit-context";
-import { ActivityItem } from "@/lib/dummy-data/activity-list";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+
+interface ActivityItem {
+  activity: string;
+  reps: number;
+  total_reps: number;
+}
 
 interface InputFormProps {
   activity: ActivityItem | undefined;
@@ -14,9 +19,9 @@ export default function InputForm({ activity }: InputFormProps) {
   const { isEditing, setIsEditing } = useEditingContext();
   const { isAdding, setIsAdding } = useAddingContext();
   const [formState, setFormState] = useState({
-    activityName: activity?.activityName || "",
-    progress: activity?.progress || 0,
-    totalReps: activity?.totalReps || 0,
+    activityName: activity?.activity || "",
+    progress: activity?.reps || 0,
+    totalReps: activity?.total_reps || 0,
   });
   useEffect(() => {
     if (isAdding) {

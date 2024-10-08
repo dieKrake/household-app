@@ -7,68 +7,45 @@ import SaveButton from "./SaveButton";
 import { FaEdit } from "react-icons/fa";
 import { useEditingContext } from "@/context/edit-context";
 import { useActivityContext } from "@/context/selected-activity-context";
+import { useEffect } from "react";
 
 export default function ActivityBoxes() {
   const { setIsEditing } = useEditingContext();
   const { activities, setActivities } = useActivitiesContext();
   const { setActivity } = useActivityContext();
-  const userId = "user-sub-123";
-  const userActivityList =
-    activities.find((user: any) => user.userId === userId)?.activities || [];
 
-  const increaseProgress = (activityId: number) => {
+  const increaseProgress = (activityId: any) => {
     setActivities((prevActivities: any) =>
-      prevActivities.map((user: any) => {
-        if (user.userId === userId) {
-          return {
-            ...user,
-            activities: user.activities.map((activity: any) => {
-              if (
-                activity.id === activityId &&
-                activity.progress < activity.totalReps
-              ) {
-                const updatedProgress = activity.progress + 1;
+      prevActivities.map((activity: any) => {
+        // Check if activity matches the one we're trying to update
+        if (activity.id === activityId && activity.reps < activity.total_reps) {
+          const updatedReps = activity.reps + 1; // Increase reps by 1
+          const isCompleted = updatedReps === activity.total_reps; // Check if completed
 
-                const isCompleted = updatedProgress === activity.totalReps;
-
-                return { ...activity, progress: updatedProgress, isCompleted };
-              }
-              return activity;
-            }),
-          };
+          return { ...activity, reps: updatedReps, isCompleted };
         }
-        return user;
+        return activity; // Return unchanged activity if no match
       })
     );
   };
 
-  const decreaseProgress = (activityId: number) => {
+  const decreaseProgress = (activityId: any) => {
     setActivities((prevActivities: any) =>
-      prevActivities.map((user: any) => {
-        if (user.userId === userId) {
-          return {
-            ...user,
-            activities: user.activities.map((activity: any) =>
-              activity.id === activityId && activity.progress > 0
-                ? {
-                    ...activity,
-                    progress: activity.progress - 1,
-                    isCompleted: false,
-                  }
-                : activity
-            ),
-          };
+      prevActivities.map((activity: any) => {
+        // Check if activity matches the one we're trying to update
+        if (activity.id === activityId && activity.reps > 0) {
+          return { ...activity, reps: activity.reps - 1, isCompleted: false }; // Decrease reps by 1
         }
-        return user;
+        return activity; // Return unchanged activity if no match
       })
     );
   };
 
   return (
     <>
-      {userActivityList.map((activity: any) => (
+      {activities.map((activity: any) => (
         <motion.div
-          key={activity.id} // key für die Haupt-Activity Box
+          key={activity.id}
           initial={{ opacity: 0, scale: 0 }}
           animate={{
             opacity: 1,
@@ -91,7 +68,7 @@ export default function ActivityBoxes() {
         >
           <div className="flex flex-col h-full justify-between p-2 gap-2 rounded-xl bg-gray-50 dark:bg-gray-900">
             <div className="relative text-center flex justify-center mt-2 text-xl text-gray-950 dark:text-light select-none">
-              <p className="text-center">{activity.activityName}</p>
+              <p className="text-center">{activity.activity}</p>
               <motion.div
                 animate={{ opacity: 0.8, scale: 1.0 }}
                 whileHover={{ scale: 1.2 }}
@@ -108,18 +85,16 @@ export default function ActivityBoxes() {
             </div>
 
             <div className="flex flex-wrap justify-center gap-[0.6rem] p-2">
-              {Array.from({ length: activity.totalReps }, (_, idx) => (
+              {Array.from({ length: activity.total_reps }, (_, idx) => (
                 <motion.div
                   key={`${activity.id}-${idx}`}
                   className={`w-6 h-6 rounded-full shadow-md ${
-                    idx < activity.progress
+                    idx < activity.reps
                       ? "bg-semiLight dark:bg-semiLight"
                       : "bg-gray-300 opacity-70 dark:bg-dark"
                   }`}
                   initial={{ scale: 1 }}
-                  animate={
-                    idx < activity.progress ? { scale: 1.1 } : { scale: 1 }
-                  }
+                  animate={idx < activity.reps ? { scale: 1.1 } : { scale: 1 }}
                   transition={{ type: "spring", stiffness: 800 }}
                 />
               ))}
