@@ -2,18 +2,9 @@
 
 import ActivityBoxes from "@/components/activity-boxes";
 import AddButton from "@/components/add-button";
-import { useActivitiesContext } from "@/context/activities-context";
 import { motion } from "framer-motion";
-import { data } from "framer-motion/client";
-import { useEffect } from "react";
-// import { useActivityContext } from "@/context/activity-context";
 
 export default function Activities() {
-  const { activities, setActivities } = useActivitiesContext();
-  // const userId = "user-sub-456";
-  // const userActivityList =
-  //   activities.find((user: any) => user.userId === userId)?.activities || [];
-
   return (
     <>
       <div className="flex flex-col h-full w-full text-lg mt-40 md:mt-0">

@@ -10,14 +10,17 @@ import { useFormState } from "react-dom";
 import { handleSignIn } from "@/lib/cognitoActions";
 import Link from "next/link";
 import { LoginButton } from "./login-button";
+import { useEffect } from "react";
+import { useActivitiesContext } from "@/context/activities-context";
 
 export default function LoginForm() {
   const [errorMessage, dispatch] = useFormState(handleSignIn, undefined);
-  console.log(
-    "NEXT TEST VARIABLES:",
-    process.env.NEXT_PUBLIC_USER_POOL_ID,
-    process.env.NEXT_PUBLIC_USER_POOL_CLIENT_ID
-  );
+  const { setActivities } = useActivitiesContext();
+
+  useEffect(() => {
+    setActivities([]);
+  }, []);
+
   return (
     <form action={dispatch} className="space-y-3">
       <div className="flex-1 rounded-lg bg-gray-50 px-6 pb-4 pt-8 dark:text-gray-900">

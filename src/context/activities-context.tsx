@@ -2,30 +2,26 @@
 
 import { createContext, useContext, useState, useEffect } from "react";
 import useAuthUser from "@/app/hooks/use-auth-user";
+import { fetchUserActivities } from "@/api/activities/activities-get";
 
 const ActivitiesContext = createContext<any>(null);
 
 export const ActivitiesProvider = ({ children }: any) => {
   const user = useAuthUser();
   const [activities, setActivities] = useState([]);
-  const userId = "user456";
 
   useEffect(() => {
-    if (user && user.username) {
-      const fetchActivities = async () => {
+    const fetchActivities = async () => {
+      if (user && user.username) {
         try {
-          const response = await fetch(
-            `/dashboard/activities/${user.username}`
-          );
-          const data = await response.json();
+          const data = await fetchUserActivities(user.username);
           setActivities(data);
         } catch (error) {
           console.error("Error fetching activities:", error);
         }
-      };
-
-      fetchActivities();
-    }
+      }
+    };
+    fetchActivities();
   }, [user]);
 
   return (
