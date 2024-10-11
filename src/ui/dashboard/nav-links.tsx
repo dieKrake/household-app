@@ -1,14 +1,14 @@
 "use client";
 import { FaHome, FaTasks, FaRunning, FaStar } from "react-icons/fa";
 import { FaKitchenSet } from "react-icons/fa6";
-import useAuthUser from "@/app/hooks/use-auth-user";
 import clsx from "clsx";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { motion } from "framer-motion";
+import { useUsersContext } from "@/context/user-context";
 
 export default function NavLinks() {
-  const user = useAuthUser();
+  const user = useUsersContext();
   const links = [
     { id: 1, name: "Home", href: "/dashboard", icon: FaHome },
     {

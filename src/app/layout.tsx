@@ -4,7 +4,6 @@ import { inter } from "@/ui/fonts";
 import ConfigureAmplifyClientSide from "./amplify-cognito-config";
 import ThemeContextProvider from "@/context/theme-context";
 import ThemeSwitch from "@/components/theme-switch";
-import { ActivitiesProvider } from "@/context/activities-context";
 import { EditingProvider } from "@/context/edit-context";
 import { ActivityProvider } from "@/context/selected-activity-context";
 import { AddingProvider } from "@/context/adding-activity-context";
@@ -29,13 +28,11 @@ export default function RootLayout({
           <UserProvider>
             <ConfigureAmplifyClientSide />
             <ThemeContextProvider>
-              <ActivitiesProvider>
-                <ActivityProvider>
-                  <AddingProvider>
-                    <EditingProvider>{children}</EditingProvider>
-                  </AddingProvider>
-                </ActivityProvider>
-              </ActivitiesProvider>
+              <ActivityProvider>
+                <AddingProvider>
+                  <EditingProvider>{children}</EditingProvider>
+                </AddingProvider>
+              </ActivityProvider>
               <ThemeSwitch />
             </ThemeContextProvider>
           </UserProvider>

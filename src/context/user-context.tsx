@@ -1,26 +1,41 @@
 "use client";
 
+import {
+  fetchAuthSession,
+  fetchUserAttributes,
+  getCurrentUser,
+} from "aws-amplify/auth";
 import { createContext, useContext, useState, useEffect } from "react";
-import useAuthUser from "@/app/hooks/use-auth-user";
 
 const UserContext = createContext<any>(null);
 
 export const UserProvider = ({ children }: any) => {
-  const user = useAuthUser();
+  const [user, setUser] = useState<any>();
+
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  useEffect(() => {
-    if (!user) {
-      setIsLoggedIn(false);
-    } else {
-      //setIsLoggedIn(true);
+  async function getUser() {
+    const session = await fetchAuthSession();
+    if (!session.tokens) {
       return;
     }
-    return;
-  }, [user]);
+    const amplifyUser = {
+      ...(await getCurrentUser()),
+      ...(await fetchUserAttributes()),
+      isAdmin: false,
+    };
+    const groups = session.tokens.accessToken.payload["cognito:groups"];
+    // @ts-ignore
+    amplifyUser.isAdmin = Boolean(groups && groups.includes("Admins"));
+    setUser(amplifyUser);
+  }
+
+  useEffect(() => {
+    getUser();
+  }, []);
 
   return (
-    <UserContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+    <UserContext.Provider value={{ user, isLoggedIn, setIsLoggedIn }}>
       {children}
     </UserContext.Provider>
   );

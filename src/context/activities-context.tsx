@@ -1,16 +1,14 @@
 "use client";
 
 import { createContext, useContext, useState, useEffect } from "react";
-import useAuthUser from "@/app/hooks/use-auth-user";
 import { fetchUserActivities } from "@/api/activities/activities-get";
 import { useUsersContext } from "./user-context";
 
 const ActivitiesContext = createContext<any>(null);
 
 export const ActivitiesProvider = ({ children }: any) => {
-  const user = useAuthUser();
   const [activities, setActivities] = useState([]);
-  const { isLoggedIn } = useUsersContext();
+  const { isLoggedIn, user } = useUsersContext();
 
   async function fetchActivities() {
     console.log("activity-context user: ", user);

@@ -10,16 +10,9 @@ import { useFormState } from "react-dom";
 import { handleSignIn } from "@/lib/cognitoActions";
 import Link from "next/link";
 import { LoginButton } from "./login-button";
-import { useEffect } from "react";
-import { useActivitiesContext } from "@/context/activities-context";
 
 export default function LoginForm() {
   const [errorMessage, dispatch] = useFormState(handleSignIn, undefined);
-  const { setActivities } = useActivitiesContext();
-
-  useEffect(() => {
-    setActivities([]);
-  }, []);
 
   return (
     <form action={dispatch} className="space-y-3">

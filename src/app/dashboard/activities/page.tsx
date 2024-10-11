@@ -1,24 +1,24 @@
 "use client";
 
-import useAuthUser from "@/app/hooks/use-auth-user";
 import ActivityBoxes from "@/components/activity-boxes";
 import AddButton from "@/components/add-button";
 import { useUsersContext } from "@/context/user-context";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
+import { ActivitiesProvider } from "@/context/activities-context";
 
 export default function Activities() {
-  const { isLoggedIn, setIsLoggedIn } = useUsersContext();
-  const user = useAuthUser();
+  const { user, isLoggedIn, setIsLoggedIn } = useUsersContext();
 
   useEffect(() => {
     console.log("activity page isLoggedIn. ", isLoggedIn);
     console.log("activitypage, user: ", user);
     setIsLoggedIn(true);
-  }, [user]);
+    console.log("activity page isLoggedIn. ", isLoggedIn);
+  }, []);
 
   return (
-    <>
+    <ActivitiesProvider>
       <div className="flex flex-col h-full w-full text-lg mt-40 md:mt-0">
         <div className="flex flex-wrap w-full justify-center">
           <ActivityBoxes />
@@ -33,6 +33,6 @@ export default function Activities() {
 
         <div className="h-10 w-full"></div>
       </div>
-    </>
+    </ActivitiesProvider>
   );
 }
