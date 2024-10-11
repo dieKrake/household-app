@@ -3,10 +3,12 @@
 import { PowerIcon } from "@heroicons/react/24/outline";
 
 import { handleSignOut } from "@/lib/cognitoActions";
+import { useUsersContext } from "@/context/user-context";
 
 export default function LogoutForm() {
+  const { setIsLoggedIn } = useUsersContext();
   function logOut() {
-    console.log("LOGOUT");
+    setIsLoggedIn(false);
   }
   return (
     <form action={handleSignOut}>

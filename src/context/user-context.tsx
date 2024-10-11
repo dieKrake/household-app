@@ -12,12 +12,11 @@ export const UserProvider = ({ children }: any) => {
   useEffect(() => {
     if (!user) {
       setIsLoggedIn(false);
-      console.log("if:userContext isLoggedIn: ", isLoggedIn);
     } else {
-      setIsLoggedIn(true);
-      console.log("else:userContext isLoggedIn: ", isLoggedIn);
+      //setIsLoggedIn(true);
       return;
     }
+    return;
   }, [user]);
 
   return (

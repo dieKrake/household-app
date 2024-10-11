@@ -1,4 +1,3 @@
-import { useUsersContext } from "@/context/user-context";
 import {
   fetchAuthSession,
   fetchUserAttributes,
@@ -8,7 +7,6 @@ import { useEffect, useState } from "react";
 
 export default function useAuthUser() {
   const [user, setUser] = useState<Record<string, any>>();
-  //const { setIsLoggedIn } = useUsersContext();
 
   useEffect(() => {
     async function getUser() {
@@ -25,7 +23,6 @@ export default function useAuthUser() {
       // @ts-ignore
       user.isAdmin = Boolean(groups && groups.includes("Admins"));
       setUser(user);
-      console.log("set user logged in");
     }
 
     getUser();
