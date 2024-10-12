@@ -6,13 +6,9 @@ import { motion } from "framer-motion";
 import { useEffect } from "react";
 
 export default function Dashboard() {
-  const { isLoggedIn, setIsLoggedIn } = useUsersContext();
-  const { activities } = useActivitiesContext();
+  const { setIsLoggedIn } = useUsersContext();
   useEffect(() => {
-    if (!isLoggedIn) {
-      setIsLoggedIn(true);
-    }
-    console.log("activities on dashboard: ", activities);
+    setIsLoggedIn(true);
   }, []);
   return (
     <motion.div

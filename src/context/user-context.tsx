@@ -14,12 +14,13 @@ export const UserProvider = ({ children }: any) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   async function getUser() {
-    if (isLoggedIn) {
-      try {
+    try {
+      if (isLoggedIn) {
         const session = await fetchAuthSession();
         if (!session.tokens) {
           return;
         }
+
         const amplifyUser = {
           ...(await getCurrentUser()),
           ...(await fetchUserAttributes()),
@@ -29,9 +30,9 @@ export const UserProvider = ({ children }: any) => {
         // @ts-ignore
         amplifyUser.isAdmin = Boolean(groups && groups.includes("Admins"));
         setUser(amplifyUser);
-      } catch (e) {
-        console.log("Error in UserContext: ", e);
       }
+    } catch (e) {
+      console.log("Error in UserContext: ", e);
     }
   }
 
