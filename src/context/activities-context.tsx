@@ -8,11 +8,12 @@ const ActivitiesContext = createContext<any>(null);
 
 export const ActivitiesProvider = ({ children }: any) => {
   const [activities, setActivities] = useState([]);
-  const { isLoggedIn, user } = useUsersContext();
+  const { user } = useUsersContext();
 
   async function fetchActivities() {
     if (user && user.username) {
       try {
+        console.log("fetching for user: ", user);
         const data = await fetchUserActivities(user.username);
         setActivities(data);
       } catch (error) {
@@ -22,10 +23,8 @@ export const ActivitiesProvider = ({ children }: any) => {
   }
 
   useEffect(() => {
-    if (isLoggedIn) {
-      fetchActivities();
-    }
-  }, [isLoggedIn]);
+    fetchActivities();
+  }, [user]);
 
   return (
     <ActivitiesContext.Provider
