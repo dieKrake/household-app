@@ -11,31 +11,36 @@ const UserContext = createContext<any>(null);
 
 export const UserProvider = ({ children }: any) => {
   const [user, setUser] = useState<any>();
-
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   async function getUser() {
-    const session = await fetchAuthSession();
-    if (!session.tokens) {
-      return;
+    if (isLoggedIn) {
+      try {
+        const session = await fetchAuthSession();
+        if (!session.tokens) {
+          return;
+        }
+        const amplifyUser = {
+          ...(await getCurrentUser()),
+          ...(await fetchUserAttributes()),
+          isAdmin: false,
+        };
+        const groups = session.tokens.accessToken.payload["cognito:groups"];
+        // @ts-ignore
+        amplifyUser.isAdmin = Boolean(groups && groups.includes("Admins"));
+        setUser(amplifyUser);
+      } catch (e) {
+        console.log("Error in UserContext: ", e);
+      }
     }
-    const amplifyUser = {
-      ...(await getCurrentUser()),
-      ...(await fetchUserAttributes()),
-      isAdmin: false,
-    };
-    const groups = session.tokens.accessToken.payload["cognito:groups"];
-    // @ts-ignore
-    amplifyUser.isAdmin = Boolean(groups && groups.includes("Admins"));
-    setUser(amplifyUser);
   }
 
   useEffect(() => {
     getUser();
-  }, []);
+  }, [isLoggedIn]);
 
   return (
-    <UserContext.Provider value={{ user, isLoggedIn, setIsLoggedIn }}>
+    <UserContext.Provider value={{ user, setUser, isLoggedIn, setIsLoggedIn }}>
       {children}
     </UserContext.Provider>
   );

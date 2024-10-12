@@ -11,12 +11,10 @@ export const ActivitiesProvider = ({ children }: any) => {
   const { isLoggedIn, user } = useUsersContext();
 
   async function fetchActivities() {
-    console.log("activity-context user: ", user);
     if (user && user.username) {
       try {
         const data = await fetchUserActivities(user.username);
         setActivities(data);
-        console.log("Fetched activities for user:", user, "data: ", data);
       } catch (error) {
         console.error("Error fetching activities:", error);
       }
@@ -25,7 +23,6 @@ export const ActivitiesProvider = ({ children }: any) => {
 
   useEffect(() => {
     if (isLoggedIn) {
-      console.log("Logged in");
       fetchActivities();
     }
   }, [isLoggedIn]);

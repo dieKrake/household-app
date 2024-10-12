@@ -25,8 +25,8 @@ export default function RootLayout({
         className={`${inter.className} text-gray-950 relative dark:bg-dark dark:text-gray-50 dark:text-opacity-90 bg-gray-200`}
       >
         <>
+          <ConfigureAmplifyClientSide />
           <UserProvider>
-            <ConfigureAmplifyClientSide />
             <ThemeContextProvider>
               <ActivityProvider>
                 <AddingProvider>

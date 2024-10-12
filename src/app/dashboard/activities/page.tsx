@@ -2,21 +2,10 @@
 
 import ActivityBoxes from "@/components/activity-boxes";
 import AddButton from "@/components/add-button";
-import { useUsersContext } from "@/context/user-context";
 import { motion } from "framer-motion";
-import { useEffect } from "react";
 import { ActivitiesProvider } from "@/context/activities-context";
 
 export default function Activities() {
-  const { user, isLoggedIn, setIsLoggedIn } = useUsersContext();
-
-  useEffect(() => {
-    console.log("activity page isLoggedIn. ", isLoggedIn);
-    console.log("activitypage, user: ", user);
-    setIsLoggedIn(true);
-    console.log("activity page isLoggedIn. ", isLoggedIn);
-  }, []);
-
   return (
     <ActivitiesProvider>
       <div className="flex flex-col h-full w-full text-lg mt-40 md:mt-0">
