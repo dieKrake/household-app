@@ -13,6 +13,7 @@ export const ActivitiesProvider = ({ children }: any) => {
   async function fetchActivities() {
     if (user && user.username) {
       try {
+        console.log("i am fetching...");
         const data = await fetchUserActivities(user.username);
         setActivities(data);
       } catch (error) {
