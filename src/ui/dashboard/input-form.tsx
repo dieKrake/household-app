@@ -4,6 +4,10 @@ import { useAddingContext } from "@/context/adding-activity-context";
 import { useEditingContext } from "@/context/edit-context";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import { useUsersContext } from "@/context/user-context";
+import { addNewActivity } from "@/api/activities/activities-add";
+import { addActivity } from "@/functions/addActivity-function";
+import { useActivitiesContext } from "@/context/activities-context";
 
 interface ActivityItem {
   activity: string;
@@ -17,7 +21,9 @@ interface InputFormProps {
 
 export default function InputForm({ activity }: InputFormProps) {
   const { isEditing, setIsEditing } = useEditingContext();
+  const { user } = useUsersContext();
   const { isAdding, setIsAdding } = useAddingContext();
+  const { fetchActivities } = useActivitiesContext();
   const [formState, setFormState] = useState({
     activityName: activity?.activity || "",
     progress: activity?.reps || 0,
@@ -28,6 +34,10 @@ export default function InputForm({ activity }: InputFormProps) {
       setFormState({ activityName: "", progress: 0, totalReps: 0 });
     }
   }, [isAdding]);
+
+  function logger() {
+    console.log("works");
+  }
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -91,7 +101,15 @@ export default function InputForm({ activity }: InputFormProps) {
 
         <button
           className="bg-semiDark dark:bg-semiLight px-5 py-3 shadow-xl rounded-xl dark:text-gray-950 text-white cursor-pointer select-none z-50 text-center mt-2 hover:scale-105 transition-transform"
-          onClick={() => console.log("Form submitted", formState)} // Hier kannst du die Submit-Logik hinzufügen
+          onClick={() =>
+            addActivity(
+              user.userId,
+              formState.activityName,
+              formState.progress,
+              formState.totalReps,
+              fetchActivities
+            )
+          }
         >
           Save
         </button>

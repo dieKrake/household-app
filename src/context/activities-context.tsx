@@ -16,6 +16,7 @@ export const ActivitiesProvider = ({ children }: any) => {
         console.log("fetching for user: ", user);
         const data = await fetchUserActivities(user.username);
         setActivities(data);
+        console.log(data);
       } catch (error) {
         console.error("Error fetching activities:", error);
       }
