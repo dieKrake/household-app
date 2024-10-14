@@ -35,10 +35,6 @@ export default function InputForm({ activity }: InputFormProps) {
     }
   }, [isAdding]);
 
-  function logger() {
-    console.log("works");
-  }
-
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormState({
@@ -101,15 +97,18 @@ export default function InputForm({ activity }: InputFormProps) {
 
         <button
           className="bg-semiDark dark:bg-semiLight px-5 py-3 shadow-xl rounded-xl dark:text-gray-950 text-white cursor-pointer select-none z-50 text-center mt-2 hover:scale-105 transition-transform"
-          onClick={() =>
-            addActivity(
+          onClick={async () => {
+            const success = await addActivity(
               user.userId,
               formState.activityName,
               formState.progress,
               formState.totalReps,
               fetchActivities
-            )
-          }
+            );
+            if (success) {
+              setIsAdding(false);
+            }
+          }}
         >
           Save
         </button>

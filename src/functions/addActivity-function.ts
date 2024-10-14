@@ -7,6 +7,13 @@ export async function addActivity(
   totalReps: number,
   refresh: () => void
 ) {
-  await addNewActivity(userId, activityName, progress, totalReps);
-  refresh();
+  try {
+    await addNewActivity(userId, activityName, progress, totalReps);
+    // Success animation
+    refresh();
+    return true;
+  } catch (error) {
+    console.log(error);
+    return false;
+  }
 }
