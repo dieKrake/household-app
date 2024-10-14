@@ -5,9 +5,9 @@ import { useState, useEffect } from "react";
 
 export default function LoadingCircle() {
   const smallScreenRadius = 23;
-  const smallScreenDots = 25;
+  const smallScreenDots = 50;
   const bigScreenRadius = 30;
-  const bigScreenDots = 40;
+  const bigScreenDots = 80;
   const [radius, setRadius] = useState(bigScreenRadius);
   const [numberOfDots, setDots] = useState(bigScreenDots);
 
