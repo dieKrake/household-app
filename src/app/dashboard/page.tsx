@@ -1,6 +1,5 @@
 "use client";
 
-import LoadingCircle from "@/components/loading-circle";
 import { useUsersContext } from "@/context/user-context";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
@@ -20,8 +19,6 @@ export default function Dashboard() {
         type: "tween",
         duration: 0.2,
       }}
-    >
-      <LoadingCircle />
-    </motion.div>
+    ></motion.div>
   );
 }

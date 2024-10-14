@@ -9,11 +9,13 @@ const ActivitiesContext = createContext<any>(null);
 export const ActivitiesProvider = ({ children }: any) => {
   const [activities, setActivities] = useState([]);
   const { user } = useUsersContext();
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   async function fetchActivities() {
     if (user && user.username) {
       try {
         console.log("fetching for user: ", user);
+        setIsLoading(true);
         const data = await fetchUserActivities(user.username);
 
         // Konvertiere numerische Felder explizit in Zahlen
@@ -24,9 +26,11 @@ export const ActivitiesProvider = ({ children }: any) => {
         }));
 
         setActivities(normalizedData);
+        setIsLoading(false);
         console.log(normalizedData);
       } catch (error) {
         console.error("Error fetching activities:", error);
+        setIsLoading(false);
       }
     }
   }
@@ -37,7 +41,7 @@ export const ActivitiesProvider = ({ children }: any) => {
 
   return (
     <ActivitiesContext.Provider
-      value={{ activities, setActivities, fetchActivities }}
+      value={{ activities, setActivities, fetchActivities, isLoading }}
     >
       {children}
     </ActivitiesContext.Provider>
