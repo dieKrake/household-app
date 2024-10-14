@@ -21,7 +21,7 @@ export default function Dashboard() {
         duration: 0.2,
       }}
     >
-      {/* <LoadingCircle /> */}
+      <LoadingCircle />
     </motion.div>
   );
 }

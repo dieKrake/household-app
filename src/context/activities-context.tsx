@@ -15,8 +15,16 @@ export const ActivitiesProvider = ({ children }: any) => {
       try {
         console.log("fetching for user: ", user);
         const data = await fetchUserActivities(user.username);
-        setActivities(data);
-        console.log(data);
+
+        // Konvertiere numerische Felder explizit in Zahlen
+        const normalizedData = data.map((activity: any) => ({
+          ...activity,
+          reps: Number(activity.reps),
+          total_reps: Number(activity.total_reps),
+        }));
+
+        setActivities(normalizedData);
+        console.log(normalizedData);
       } catch (error) {
         console.error("Error fetching activities:", error);
       }
