@@ -4,7 +4,7 @@ import ActivityBoxes from "@/components/activity-boxes";
 import AddButton from "@/components/add-button";
 import { motion } from "framer-motion";
 import { useUsersContext } from "@/context/user-context";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import LoadingCircle from "@/components/loading-circle";
 import { useActivitiesContext } from "@/context/activities-context";
 

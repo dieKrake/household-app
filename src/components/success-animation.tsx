@@ -1,5 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
+import { FaSmileBeam } from "react-icons/fa";
 
 export default function SuccessAnimation() {
   const [showAnimation, setShowAnimation] = useState(true);
@@ -32,9 +33,15 @@ export default function SuccessAnimation() {
                 duration: 0.5,
               },
             }}
-            className="bg-transparent h-24 w-24 text-2xl flex justify-center items-center"
+            className="dark:bg-semiLight dark:text-gray-900 bg-semiDark text-white rounded-2xl p-4 text-xl flex justify-center items-center"
           >
-            Success
+            <div className="flex select-none">
+              <FaSmileBeam />
+              <div>&nbsp; Activity Added &nbsp;</div>
+              <div>
+                <FaSmileBeam />
+              </div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
