@@ -10,12 +10,12 @@ import SideNav from "@/ui/dashboard/sidenav";
 export default function Layout({ children }: { children: React.ReactNode }) {
   const { isEditing } = useEditingContext();
   const { isAdding } = useAddingContext();
-  const { activity } = useActivityContext();
+  const { selectedActivity } = useActivityContext();
   return (
     <ActivitiesProvider>
       <div className="flex h-screen flex-row md:flex-row md:overflow-hidden">
-        {isEditing && <InputForm activity={activity} />}
-        {isAdding && <InputForm activity={activity} />}
+        {isEditing && <InputForm activity={selectedActivity} />}
+        {isAdding && <InputForm activity={selectedActivity} />}
         <div className="w-full flex-none md:w-64 md:static fixed z-40">
           <SideNav />
         </div>

@@ -9,7 +9,6 @@ export async function addActivity(
 ) {
   try {
     await addNewActivity(userId, activityName, progress, totalReps);
-    // Success animation
     refresh();
     return true;
   } catch (error) {

@@ -8,9 +8,13 @@ import { useUsersContext } from "@/context/user-context";
 import { addActivity } from "@/functions/addActivity-function";
 import { useActivitiesContext } from "@/context/activities-context";
 import SuccessAnimation from "@/components/success-animation";
+import { updateSelectedActivity } from "@/api/activities/activities-update";
+import { useActivityContext } from "@/context/selected-activity-context";
+import { editActivity } from "@/functions/editActivity-function";
 
 interface ActivityItem {
   activity: string;
+  id: string;
   reps: number;
   total_reps: number;
 }
@@ -20,6 +24,7 @@ interface InputFormProps {
 }
 
 export default function InputForm({ activity }: InputFormProps) {
+  const { selectedActivity } = useActivityContext();
   const { isEditing, setIsEditing } = useEditingContext();
   const { user } = useUsersContext();
   const { isAdding, setIsAdding } = useAddingContext();
@@ -54,6 +59,7 @@ export default function InputForm({ activity }: InputFormProps) {
     setTimeout(() => {
       setIsAnimationShown(false);
       setIsAdding(false);
+      setIsEditing(false);
     }, 1200);
   };
 
@@ -112,15 +118,31 @@ export default function InputForm({ activity }: InputFormProps) {
             <button
               className="bg-semiDark dark:bg-semiLight px-5 py-3 shadow-xl rounded-xl dark:text-gray-950 text-white cursor-pointer select-none z-50 text-center mt-2 hover:scale-105 transition-transform"
               onClick={async () => {
-                const success = await addActivity(
-                  user.userId,
-                  formState.activityName,
-                  formState.progress,
-                  formState.totalReps,
-                  fetchActivities
-                );
-                if (success) {
-                  handleSuccessAnimation();
+                if (isAdding) {
+                  const success = await addActivity(
+                    user.userId,
+                    formState.activityName,
+                    formState.progress,
+                    formState.totalReps,
+                    fetchActivities
+                  );
+                  if (success) {
+                    handleSuccessAnimation();
+                  }
+                }
+                if (isEditing && selectedActivity) {
+                  const success = await editActivity(
+                    selectedActivity?.user_id,
+                    selectedActivity?.id,
+                    formState.activityName,
+                    formState.progress,
+                    formState.totalReps,
+                    fetchActivities
+                  );
+                  if (success) {
+                    // Anpassen, erfolgreich edited
+                    handleSuccessAnimation();
+                  }
                 }
               }}
             >

@@ -4,13 +4,15 @@ import { createContext, useContext, useState, ReactNode } from "react";
 
 interface ActivityItem {
   activity: string;
+  id: string;
   reps: number;
   total_reps: number;
+  user_id: string;
 }
 
 interface ActivityContextProps {
-  activity: ActivityItem | undefined;
-  setActivity: (activity: ActivityItem | undefined) => void;
+  selectedActivity: ActivityItem | undefined;
+  setSelectedActivity: (activity: ActivityItem | undefined) => void;
 }
 
 const ActivityContext = createContext<ActivityContextProps | undefined>(
@@ -18,10 +20,12 @@ const ActivityContext = createContext<ActivityContextProps | undefined>(
 );
 
 export const ActivityProvider = ({ children }: { children: ReactNode }) => {
-  const [activity, setActivity] = useState<ActivityItem | undefined>(undefined);
+  const [selectedActivity, setSelectedActivity] = useState<
+    ActivityItem | undefined
+  >(undefined);
 
   return (
-    <ActivityContext.Provider value={{ activity, setActivity }}>
+    <ActivityContext.Provider value={{ selectedActivity, setSelectedActivity }}>
       {children}
     </ActivityContext.Provider>
   );

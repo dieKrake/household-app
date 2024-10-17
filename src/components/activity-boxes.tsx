@@ -11,7 +11,7 @@ import { useActivityContext } from "@/context/selected-activity-context";
 export default function ActivityBoxes() {
   const { setIsEditing } = useEditingContext();
   const { activities, setActivities } = useActivitiesContext();
-  const { setActivity } = useActivityContext();
+  const { setSelectedActivity } = useActivityContext();
 
   const increaseProgress = (activityId: any) => {
     setActivities((prevActivities: any) =>
@@ -77,7 +77,7 @@ export default function ActivityBoxes() {
                 <FaEdit
                   onClick={() => {
                     setIsEditing(true);
-                    setActivity(activity);
+                    setSelectedActivity(activity);
                   }}
                 />
               </motion.div>
