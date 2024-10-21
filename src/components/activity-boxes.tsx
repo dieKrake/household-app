@@ -89,7 +89,7 @@ export default function ActivityBoxes() {
               damping: 20,
             },
           }}
-          className="w-72 h-52 md:w-60 md:h-60 mx-2 mb-5 shadow-lg"
+          className="w-72 h-52 md:w-68 md:h-52 mx-2 mb-5 shadow-lg"
         >
           <div className="flex flex-col h-full justify-between p-2 gap-2 rounded-xl bg-gray-50 dark:bg-gray-900">
             <div className="relative text-center flex justify-center mt-2 text-xl text-gray-950 dark:text-light select-none">
@@ -100,15 +100,17 @@ export default function ActivityBoxes() {
                 className="absolute left-0 pl-1 pt-1 cursor-pointer"
               >
                 <FaBan
-                  className="text-red-500"
+                  className="text-red-500 mt-1"
                   onClick={() => {
                     setShowDeleteAnimation(true);
-                    setActivityToDelete(activity); // Die Aktivität speichern, die gelöscht werden soll
+                    setActivityToDelete(activity);
                   }}
                 />
               </motion.div>
 
-              <p className="text-center w-40 mt-4">{activity.activity}</p>
+              <p className="text-center text-xl w-40 mt-3">
+                {activity.activity}
+              </p>
               <motion.div
                 animate={{ opacity: 0.8, scale: 1.0 }}
                 whileHover={{ scale: 1.2 }}
@@ -116,7 +118,6 @@ export default function ActivityBoxes() {
                 className="absolute right-0 pr-1 pt-1 cursor-pointer"
               >
                 <FaEdit
-                  className="text-lg"
                   onClick={() => {
                     setIsEditing(true);
                     setSelectedActivity(activity);
@@ -153,7 +154,7 @@ export default function ActivityBoxes() {
               >
                 <ActivityButton text="Undo" />
               </div>
-              <div className="w-full">{/* <SaveButton /> */}</div>
+              {/* <div className="w-full"><SaveButton /></div> */}
             </div>
           </div>
         </motion.div>

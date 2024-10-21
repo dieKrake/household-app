@@ -7,7 +7,7 @@ import { RiAddCircleFill } from "react-icons/ri";
 export default function AddButton() {
   const { setIsAdding } = useAddingContext();
   return (
-    <div className="flex items-start md:items-center justify-center select-none w-72 h-52 md:w-60 md:h-60 mx-2 mb-5">
+    <div className="flex items-start md:items-center justify-center select-none w-72 h-52 md:w-68 md:h-52 mx-2 mb-5">
       <motion.div
         animate={{ opacity: 0.95, scale: 1.0 }}
         whileHover={{ scale: 1.2 }}
