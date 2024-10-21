@@ -63,7 +63,7 @@ export default function ActivityBoxes() {
               damping: 20,
             },
           }}
-          className="w-64 h-60 sm:w-56 sm:h-56 md:w-50 md:h-60 mx-2 mb-5 shadow-lg"
+          className="w-64 h-72 mx-2 mb-5 shadow-lg"
         >
           <div className="flex flex-col h-full justify-between p-2 gap-2 rounded-xl bg-gray-50 dark:bg-gray-900">
             <div className="relative text-center flex justify-center mt-2 text-xl text-gray-950 dark:text-light select-none">
@@ -76,7 +76,7 @@ export default function ActivityBoxes() {
                 <FaBan />
               </motion.div>
 
-              <p className="text-center w-36">{activity.activity}</p>
+              <p className="text-center w-40">{activity.activity}</p>
               <motion.div
                 animate={{ opacity: 0.8, scale: 1.0 }}
                 whileHover={{ scale: 1.2 }}
