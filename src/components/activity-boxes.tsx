@@ -4,7 +4,7 @@ import ActivityButton from "./activity-button";
 import { motion } from "framer-motion";
 import { useActivitiesContext } from "@/context/activities-context";
 import SaveButton from "./SaveButton";
-import { FaEdit, FaBan } from "react-icons/fa";
+import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { useEditingContext } from "@/context/edit-context";
 import { useActivityContext } from "@/context/selected-activity-context";
 import { useState } from "react";
@@ -99,7 +99,7 @@ export default function ActivityBoxes() {
                 whileTap={{ scale: 0.9 }}
                 className="absolute left-0 pl-1 pt-1 cursor-pointer"
               >
-                <FaBan
+                <FaTrashAlt
                   className="text-red-500 mt-1"
                   onClick={() => {
                     setShowDeleteAnimation(true);
