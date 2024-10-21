@@ -4,7 +4,7 @@ import ActivityButton from "./activity-button";
 import { motion } from "framer-motion";
 import { useActivitiesContext } from "@/context/activities-context";
 import SaveButton from "./SaveButton";
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaBan } from "react-icons/fa";
 import { useEditingContext } from "@/context/edit-context";
 import { useActivityContext } from "@/context/selected-activity-context";
 
@@ -67,7 +67,16 @@ export default function ActivityBoxes() {
         >
           <div className="flex flex-col h-full justify-between p-2 gap-2 rounded-xl bg-gray-50 dark:bg-gray-900">
             <div className="relative text-center flex justify-center mt-2 text-xl text-gray-950 dark:text-light select-none">
-              <p className="text-center">{activity.activity}</p>
+              <motion.div
+                animate={{ opacity: 0.8, scale: 1.0 }}
+                whileHover={{ scale: 1.2 }}
+                whileTap={{ scale: 0.9 }}
+                className="absolute left-0 pl-1 pt-1 cursor-pointer"
+              >
+                <FaBan />
+              </motion.div>
+
+              <p className="text-center w-36">{activity.activity}</p>
               <motion.div
                 animate={{ opacity: 0.8, scale: 1.0 }}
                 whileHover={{ scale: 1.2 }}
