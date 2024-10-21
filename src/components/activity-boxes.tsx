@@ -7,23 +7,26 @@ import SaveButton from "./SaveButton";
 import { FaEdit, FaBan } from "react-icons/fa";
 import { useEditingContext } from "@/context/edit-context";
 import { useActivityContext } from "@/context/selected-activity-context";
+import { useState } from "react";
+import ConfirmWindow from "./confirm-window";
+import { deleteActivity } from "@/api/activities/activities-delete";
 
 export default function ActivityBoxes() {
   const { setIsEditing } = useEditingContext();
   const { activities, setActivities } = useActivitiesContext();
   const { setSelectedActivity } = useActivityContext();
+  const [showDeleteAnimation, setShowDeleteAnimation] = useState(false);
+  const [activityToDelete, setActivityToDelete] = useState<any>(null);
 
   const increaseProgress = (activityId: any) => {
     setActivities((prevActivities: any) =>
       prevActivities.map((activity: any) => {
-        // Check if activity matches the one we're trying to update
         if (activity.id === activityId && activity.reps < activity.total_reps) {
-          const updatedReps = activity.reps + 1; // Increase reps by 1
-          const isCompleted = updatedReps === activity.total_reps; // Check if completed
-
+          const updatedReps = activity.reps + 1;
+          const isCompleted = updatedReps === activity.total_reps;
           return { ...activity, reps: updatedReps, isCompleted };
         }
-        return activity; // Return unchanged activity if no match
+        return activity;
       })
     );
   };
@@ -31,17 +34,40 @@ export default function ActivityBoxes() {
   const decreaseProgress = (activityId: any) => {
     setActivities((prevActivities: any) =>
       prevActivities.map((activity: any) => {
-        // Check if activity matches the one we're trying to update
         if (activity.id === activityId && activity.reps > 0) {
-          return { ...activity, reps: activity.reps - 1, isCompleted: false }; // Decrease reps by 1
+          return { ...activity, reps: activity.reps - 1, isCompleted: false };
         }
-        return activity; // Return unchanged activity if no match
+        return activity;
       })
     );
   };
 
+  const handleDeleteActivity = (userId: string, activityId: string) => {
+    deleteActivity(userId, activityId)
+      .then(() => {
+        setActivities((prevActivities: any) =>
+          prevActivities.filter((activity: any) => activity.id !== activityId)
+        );
+      })
+      .catch((error) => {
+        console.error("Error deleting activity:", error);
+      });
+  };
+
   return (
     <>
+      {showDeleteAnimation && activityToDelete && (
+        <ConfirmWindow
+          onConfirm={() => {
+            handleDeleteActivity(activityToDelete.user_id, activityToDelete.id);
+            setShowDeleteAnimation(false);
+          }}
+          onCancel={() => {
+            setShowDeleteAnimation(false);
+          }}
+        />
+      )}
+
       {activities.map((activity: any) => (
         <motion.div
           key={activity.id}
@@ -73,7 +99,13 @@ export default function ActivityBoxes() {
                 whileTap={{ scale: 0.9 }}
                 className="absolute left-0 pl-1 pt-1 cursor-pointer"
               >
-                <FaBan />
+                <FaBan
+                  className="text-red-500"
+                  onClick={() => {
+                    setShowDeleteAnimation(true);
+                    setActivityToDelete(activity); // Die Aktivität speichern, die gelöscht werden soll
+                  }}
+                />
               </motion.div>
 
               <p className="text-center w-40">{activity.activity}</p>
