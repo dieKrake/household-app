@@ -3,13 +3,13 @@
 import ActivityButton from "./activity-button";
 import { motion } from "framer-motion";
 import { useActivitiesContext } from "@/context/activities-context";
-import SaveButton from "./SaveButton";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { useEditingContext } from "@/context/edit-context";
 import { useActivityContext } from "@/context/selected-activity-context";
 import { useState } from "react";
 import ConfirmWindow from "./confirm-window";
 import { deleteActivity } from "@/api/activities/activities-delete";
+import { editActivity } from "@/functions/editActivity-function";
 
 export default function ActivityBoxes() {
   const { setIsEditing } = useEditingContext();
@@ -24,6 +24,13 @@ export default function ActivityBoxes() {
         if (activity.id === activityId && activity.reps < activity.total_reps) {
           const updatedReps = activity.reps + 1;
           const isCompleted = updatedReps === activity.total_reps;
+          editActivity(
+            activity.user_id,
+            activity.id,
+            activity.activity,
+            updatedReps,
+            activity.total_reps
+          );
           return { ...activity, reps: updatedReps, isCompleted };
         }
         return activity;
@@ -35,7 +42,15 @@ export default function ActivityBoxes() {
     setActivities((prevActivities: any) =>
       prevActivities.map((activity: any) => {
         if (activity.id === activityId && activity.reps > 0) {
-          return { ...activity, reps: activity.reps - 1, isCompleted: false };
+          const updatedReps = activity.reps - 1;
+          editActivity(
+            activity.user_id,
+            activity.id,
+            activity.activity,
+            updatedReps,
+            activity.total_reps
+          );
+          return { ...activity, reps: updatedReps, isCompleted: false };
         }
         return activity;
       })
@@ -144,7 +159,9 @@ export default function ActivityBoxes() {
             <div className="flex flex-wrap gap-2 text-gray-950 mb-2">
               <div
                 className="w-[calc(50%-0.25rem)] select-none"
-                onClick={() => increaseProgress(activity.id)}
+                onClick={() => {
+                  increaseProgress(activity.id);
+                }}
               >
                 <ActivityButton text="Done" />
               </div>

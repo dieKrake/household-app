@@ -37,7 +37,7 @@ export default function SuccessAnimation() {
           >
             <div className="flex select-none">
               <FaSmileBeam />
-              <div>&nbsp; Activity Added &nbsp;</div>
+              <div>&nbsp; Nice! &nbsp;</div>
               <div>
                 <FaSmileBeam />
               </div>

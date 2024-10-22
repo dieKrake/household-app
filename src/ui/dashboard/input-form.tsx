@@ -95,16 +95,6 @@ export default function InputForm({ activity }: InputFormProps) {
               className="text-center font-semibold dark:bg-light dark:text-dark border rounded p-2 mb-4 w-full focus:outline-none focus:ring focus:ring-semiDark focus:border-semiDark"
             />
 
-            <label className="block mb-2">Progress:</label>
-            <input
-              type="number"
-              name="progress"
-              value={formState.progress}
-              onChange={handleInputChange}
-              onFocus={handleFocus}
-              className="text-center font-semibold dark:bg-light dark:text-dark border rounded p-2 mb-4 w-full focus:outline-none focus:ring focus:ring-semiDark focus:border-semiDark"
-            />
-
             <label className="block mb-2">Total Reps:</label>
             <input
               type="number"

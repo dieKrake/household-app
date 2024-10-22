@@ -6,7 +6,7 @@ export async function editActivity(
   activityName: string,
   progress: number,
   totalReps: number,
-  refresh: () => void
+  refresh?: () => void
 ) {
   try {
     await updateSelectedActivity(
@@ -16,7 +16,10 @@ export async function editActivity(
       progress,
       totalReps
     );
-    refresh();
+    if (refresh) {
+      refresh();
+    }
+
     return true;
   } catch (error) {
     console.log(error);

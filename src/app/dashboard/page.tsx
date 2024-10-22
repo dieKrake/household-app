@@ -1,6 +1,6 @@
 "use client";
 
-import SuccessAnimation from "@/components/success-animation";
+import DateBox from "@/components/date-box";
 import { useUsersContext } from "@/context/user-context";
 import { motion } from "framer-motion";
 import { useEffect } from "react";
@@ -14,7 +14,7 @@ export default function Dashboard() {
 
   return (
     <>
-      <SuccessAnimation />
+      <DateBox />
       <motion.div
         initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
